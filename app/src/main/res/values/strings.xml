@@ -8,6 +8,13 @@
     <string name="menu_home">Home</string>
     <string name="menu_favourite">Favourite</string>
 
+    <string name="details">Details</string>
+
+    <string name="runtime">120 min</string>
+    <string name="vote_count">130100 votes</string>
+    <string name="genres">Action, Adventure, Comedy, Fantasy</string>
+
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
