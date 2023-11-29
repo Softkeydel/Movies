@@ -8,7 +8,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.NavController
 import com.imdb.movies.R
 import com.imdb.movies.databinding.ActivityMainBinding
@@ -22,6 +24,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
+        windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -31,7 +36,23 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            when (destination.id) {
+                R.id.splashFragment -> {
+                    windowInsetsController.hide(WindowInsetsCompat.Type.navigationBars())
+                    supportActionBar?.hide()
+//                    binding.appBar.visibility = View.GONE
+                }
+                R.id.dashboardFragment -> {
+                    windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
+                    supportActionBar?.show()
+                }
+                else -> {
 
+                }
+            }
+        }
 
     }
 
@@ -52,8 +73,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        return if(navController.currentDestination?.id == R.id.dashboardFragment)  {
+            super.onBackPressed()
+            super.onSupportNavigateUp()
+        } else {
+            (navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp())
+        }
     }
 }

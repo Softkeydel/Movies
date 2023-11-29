@@ -47,6 +47,12 @@ class SplashFragment : Fragment() {
         AnimatorInflater.loadAnimator(requireContext(), R.animator.logo_anim)
             .also { it.setTarget(binding.imvLogo) }.start()
 
+        lifecycleScope.launch(Dispatchers.Main) {
+            delay(1000)
+            findNavController().navigate(R.id.action_splashFragment_to_dashboardFragment)
+
+        }
+
     }
 
     override fun onDestroyView() {
