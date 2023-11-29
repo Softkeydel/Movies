@@ -19,7 +19,7 @@
             android:paddingHorizontal="@dimen/dp_5"
             app:spanCount="2"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            />
+            tools:listitem="@layout/item_movie"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
