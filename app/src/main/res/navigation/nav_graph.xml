@@ -10,22 +10,22 @@
         android:name="com.imdb.movies.view.splash.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
-
+        <action
+            android:id="@+id/action_splashFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.imdb.movies.view.dashboard.home.HomeFragment"
-        android:label="@string/home_fragment"
-        tools:layout="@layout/fragment_home">
+        android:id="@+id/dashboardFragment"
+        android:name="com.imdb.movies.view.dashboard.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard">
 
 
     </fragment>
-    <fragment
-        android:id="@+id/favouriteFragment"
-        android:name="com.imdb.movies.view.dashboard.favourite.FavouriteFragment"
-        android:label="@string/favourite_fragment"
-        tools:layout="@layout/fragment_favourite">
 
-    </fragment>
 </navigation>

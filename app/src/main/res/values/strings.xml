@@ -4,8 +4,9 @@
     <!-- Strings used for fragments for navigation -->
     <string name="home_fragment">Home Fragment</string>
     <string name="favourite_fragment">Favourite Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_favourite">Favourite</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
