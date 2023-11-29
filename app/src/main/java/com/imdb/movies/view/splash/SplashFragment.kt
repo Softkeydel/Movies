@@ -44,7 +44,8 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        AnimatorInflater.loadAnimator(requireContext(), R.animator.logo_anim)
+            .also { it.setTarget(binding.imvLogo) }.start()
 
     }
 
