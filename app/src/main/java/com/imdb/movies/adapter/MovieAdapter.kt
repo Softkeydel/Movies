@@ -13,7 +13,7 @@ import com.imdb.movies.model.Movie
 
 
 
-class MovieAdapter(private val mContext: Context, val movies: List<Movie>, private val mCallback: (view: View, position: Int, movie: Movie) -> Unit) : RecyclerView.Adapter<MovieAdapter.ItemHolder>() {
+class MovieAdapter(private val mContext: Context, val movies: MutableList<Movie>, private val mCallback: (view: View, position: Int, movie: Movie) -> Unit) : RecyclerView.Adapter<MovieAdapter.ItemHolder>() {
 
     private var lastPosition = RecyclerView.NO_POSITION
 
