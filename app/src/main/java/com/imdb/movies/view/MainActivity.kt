@@ -47,6 +47,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.dashboardFragment -> {
                     windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
                     supportActionBar?.show()
+                    binding.toolbar.menu.clear()
+                    binding.toolbar.inflateMenu(R.menu.menu_main)
+                }
+                R.id.detailsFragment -> {
+                    windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
+//                    supportActionBar?.show()
+                    binding.toolbar.menu.clear()
                 }
                 else -> {
 
