@@ -98,14 +98,18 @@ class MovieRepository private constructor(): IMovieRepository {
     override fun insertMovie(movie: Movie) = flow {
         emit(ApiResponse.loading(null))
 
+        appDatabase.movieDao().insert(com.imdb.movies.database.entity.Movie(movie))
 
+        emit(ApiResponse.loading(movie))
     }
 
 
     override fun deleteMovie(movie: Movie) = flow {
         emit(ApiResponse.loading(null))
 
+        appDatabase.movieDao().deleteById(movie.movieId)
 
+        emit(ApiResponse.loading(movie))
     }
 
 

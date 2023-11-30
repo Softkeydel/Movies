@@ -65,7 +65,11 @@ class FavouriteFragment : Fragment() {
     private fun onItemClick(view: View, position: Int, movie: Movie) {
         when(view.id) {
             R.id.btnFav -> {
-
+                if(movie.favourite) {
+                    viewModel.addToFavourite(movie)
+                } else {
+                    viewModel.removeFromFavourite(movie)
+                }
             }
             else -> {
                 findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)
