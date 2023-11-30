@@ -13,6 +13,8 @@ import retrofit2.http.Url
 
 interface ApiService {
 
+    @POST(GET_MOVIES)
+    suspend fun getMovies(@Body param: JSONObject?): Response<BaseResponse<Paginated<MovieHolder>>>
 
 
 }
