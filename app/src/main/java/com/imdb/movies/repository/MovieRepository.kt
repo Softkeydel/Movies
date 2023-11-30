@@ -4,6 +4,7 @@ package com.imdb.movies.repository
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.imdb.movies.base.AppClass
+import com.imdb.movies.database.AppDatabase
 
 import com.imdb.movies.model.BaseResponse
 import com.imdb.movies.model.Movie
@@ -31,6 +32,7 @@ class MovieRepository private constructor(): IMovieRepository {
 
     companion object {
         private val apiService = ApiClient.apiService
+        private val appDatabase = AppDatabase.getInstance()
         val instance: MovieRepository by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
             MovieRepository()
         }
@@ -84,9 +86,12 @@ class MovieRepository private constructor(): IMovieRepository {
 
 
     override fun getFavouriteMovies() = flow {
-        emit(ApiResponse.loading(null))
+//        emit(ApiResponse.loading(null))
 
-
+        appDatabase.movieDao().getFavouriteMovies().map { it.map { movie ->
+            Movie(movie) } }.collect{
+            emit(ApiResponse.success(it))
+        }
     }
 
 

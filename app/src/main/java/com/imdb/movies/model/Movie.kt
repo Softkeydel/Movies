@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 
-
 @Parcelize
 data class Movie(
     @SerializedName("id") var movieId: String? = null,
@@ -20,7 +19,9 @@ data class Movie(
     ) : BaseObservable(), Parcelable {
 
 
-
+    constructor(movie: com.imdb.movies.database.entity.Movie): this() {
+        copy(movie)
+    }
 
 
 //    var _title: String? = null
@@ -40,6 +41,15 @@ data class Movie(
 //        notifyPropertyChanged(BR.favourite)
     }
 
+    private fun copy(movie: com.imdb.movies.database.entity.Movie) {
+        this.movieId = movie.movieId
+        this.title = Title(movie.title)
+        this.description = movie.description
+        this.image = Image(imageUrl = movie.image)
+        this.rating = Rating(movie.rating, movie.voteCount)
+        this.releaseYear = ReleaseYear(movie.releaseYear)
+        this.favourite = movie.favourite
+    }
 
 
 

@@ -12,7 +12,7 @@ import com.imdb.movies.model.Movie
 
 
 
-class FavMovieAdapter(private val mContext: Context, val movies: List<Movie>, private val mCallback: (view: View, position: Int, movie: Movie) -> Unit) : RecyclerView.Adapter<FavMovieAdapter.ItemHolder>() {
+class FavMovieAdapter(private val mContext: Context, val movies: MutableList<Movie>, private val mCallback: (view: View, position: Int, movie: Movie) -> Unit) : RecyclerView.Adapter<FavMovieAdapter.ItemHolder>() {
 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ItemHolder {
