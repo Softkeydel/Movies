@@ -13,6 +13,7 @@ import com.imdb.movies.adapter.MovieAdapter
 import com.imdb.movies.databinding.FragmentHomeBinding
 import com.imdb.movies.model.Movie
 import com.imdb.movies.network.Status
+import com.imdb.movies.view.dashboard.DashboardFragmentDirections
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
@@ -74,8 +75,8 @@ class HomeFragment : Fragment() {
                 }
             }
             else -> {
-                findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)
-
+//                findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)
+                findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToDetailsFragment(movie))
             }
         }
     }

@@ -14,6 +14,7 @@ import com.imdb.movies.adapter.MovieAdapter
 import com.imdb.movies.databinding.FragmentFavouriteBinding
 import com.imdb.movies.model.Movie
 import com.imdb.movies.network.Status
+import com.imdb.movies.view.dashboard.DashboardFragmentDirections
 import kotlinx.coroutines.launch
 
 /**
@@ -72,7 +73,8 @@ class FavouriteFragment : Fragment() {
                 }
             }
             else -> {
-                findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)
+//                findNavController().navigate(R.id.action_dashboardFragment_to_detailsFragment)
+                findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToDetailsFragment(movie))
             }
         }
     }
