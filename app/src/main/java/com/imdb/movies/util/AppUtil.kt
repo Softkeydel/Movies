@@ -141,6 +141,7 @@ fun Toolbar.setNavigationIconColor(@ColorInt color: Int) = navigationIcon?.mutat
 
 
 
+fun AssetManager.readAssetsFile(fileName : String): String = open(fileName).bufferedReader().use{it.readText()}
 
 
 

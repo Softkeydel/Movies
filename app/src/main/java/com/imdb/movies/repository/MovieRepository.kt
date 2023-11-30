@@ -12,6 +12,7 @@ import com.imdb.movies.model.MovieHolder
 import com.imdb.movies.model.Paginated
 import com.imdb.movies.network.ApiClient
 import com.imdb.movies.network.ApiResponse
+import com.imdb.movies.util.readAssetsFile
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -69,12 +70,24 @@ class MovieRepository private constructor(): IMovieRepository {
                         ApiResponse.error(response = null, message = response.body()?.message ?: "")
                     }
                 } else {
+//                        val br = BufferedReader(InputStreamReader(AppClass.instance.assets.open("response.json")))
+                    val json = AppClass.instance.assets.readAssetsFile("response.json")
+                    val type: Type = object : TypeToken<BaseResponse<Paginated<MovieHolder>>>() {}.type
+                    val responseBody = Gson().fromJson<BaseResponse<Paginated<MovieHolder>>>(json, type)
 
+                    ApiResponse.success(response = BaseResponse(
+                        status = true,
+                        message = responseBody?.message,
+                        data = Paginated(
+                            pageInfo = responseBody?.data?.pageInfo,
+                            list = responseBody?.data?.list?.map { it.movie }
+                        )
+                    ))
 
-                    ApiResponse.error(
-                        response = null,
-                        message = response.headers().get("msg") ?: "Some Error Occurred"
-                    )
+//                    ApiResponse.error(
+//                        response = null,
+//                        message = response.headers().get("msg") ?: "Some Error Occurred"
+//                    )
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
