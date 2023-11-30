@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.imdb.movies.R
 import com.imdb.movies.databinding.ItemMovieBinding
 import com.imdb.movies.model.Movie
-
+import com.imdb.movies.util.loadImage
 
 
 class MovieAdapter(private val mContext: Context, val movies: MutableList<Movie>, private val mCallback: (view: View, position: Int, movie: Movie) -> Unit) : RecyclerView.Adapter<MovieAdapter.ItemHolder>() {
@@ -23,9 +23,18 @@ class MovieAdapter(private val mContext: Context, val movies: MutableList<Movie>
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
+        holder.binding.movie = movies[position]
+        holder.binding.imvMovie.loadImage(movies[position].image?.imageUrl)
 
+
+        holder.binding.btnFav.setOnClickListener {
+//            movies[position].updateFavourite(!movies[position].favourite)
+            movies[position].favourite = !movies[position].favourite
+            mCallback.invoke(it, position, movies[position])
+        }
         holder.binding.cardMovie.setOnClickListener { mCallback.invoke(it, position, movies[position]) }
     }
+
 
 
 
@@ -37,7 +46,6 @@ class MovieAdapter(private val mContext: Context, val movies: MutableList<Movie>
 
     class ItemHolder(itemBinding: ItemMovieBinding) : RecyclerView.ViewHolder(itemBinding.root) {
          val binding: ItemMovieBinding = itemBinding
-
 
     }
 
