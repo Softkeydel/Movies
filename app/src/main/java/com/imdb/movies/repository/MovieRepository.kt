@@ -1,11 +1,9 @@
 package com.imdb.movies.repository
 
-
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.imdb.movies.base.AppClass
 import com.imdb.movies.database.AppDatabase
-
 import com.imdb.movies.model.BaseResponse
 import com.imdb.movies.model.Movie
 import com.imdb.movies.model.MovieHolder
@@ -42,7 +40,23 @@ class MovieRepository private constructor(): IMovieRepository {
 
 
 
+    override fun getMovies(params: JSONObject?) = flow {
+        emit(ApiResponse.loading(null))
 
+        getMoviesFromServer(params).combine(getFavouriteMovies()) { movieResponse, favMovieResponse ->
+
+//            if(!favMovieResponse.response.isNullOrEmpty()) {
+            movieResponse.response?.data?.list?.forEach { movie ->
+//                val index = favMovieResponse.response?.indexOf(movie) ?: -1
+                movie.favourite = (favMovieResponse.response?.indexOf(movie) ?: -1) >= 0
+            }
+//            }
+
+            movieResponse
+        }.collect{
+            emit(it)
+        }
+    }
 
 
 

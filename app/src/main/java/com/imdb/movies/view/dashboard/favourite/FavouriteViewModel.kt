@@ -15,6 +15,10 @@ class FavouriteViewModel(
 ) : ViewModel() {
 
 
+    fun getMovies(params: JSONObject?) = movieRepository.getMovies(params)
+
+
+    fun getMoviesFromServer(params: JSONObject?) = movieRepository.getMoviesFromServer(params)
 
 
 
@@ -36,7 +40,6 @@ class FavouriteViewModel(
             }
         }
     }
-
 
 
 }

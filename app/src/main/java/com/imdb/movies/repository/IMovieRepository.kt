@@ -9,6 +9,7 @@ import org.json.JSONObject
 
 interface IMovieRepository {
 
+    fun getMovies(params: JSONObject?): Flow<ApiResponse<BaseResponse<Paginated<Movie>>>>
 
     fun getMoviesFromServer(params: JSONObject?): Flow<ApiResponse<BaseResponse<Paginated<Movie>>>>
 

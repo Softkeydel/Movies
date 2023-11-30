@@ -14,9 +14,10 @@ class HomeViewModel(
 ) : ViewModel() {
 
 
+    fun getMovies(params: JSONObject?) = movieRepository.getMovies(params)
 
 
-    fun getMovies(params: JSONObject?) = movieRepository.getMoviesFromServer(params)
+    fun getMoviesFromServer(params: JSONObject?) = movieRepository.getMoviesFromServer(params)
 
 
 
@@ -38,6 +39,5 @@ class HomeViewModel(
             }
         }
     }
-
 
 }
